@@ -5,45 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Class {
+
     public static void main(String[] args) {
         basicTestsHashComp();
-    }
-
-    public static void basicTestsHashComp() {
-        PriorityQueue<Pokemon> pq = new PriorityQueue<>();
-        ArrayList<Pokemon> al = new ArrayList<>();
-        HashMap<Pokemon, ArrayList<String>> hm = new HashMap<>();
-
-        try {
-            Pokemon pikachu = new Pokemon("Pikachu", 25, "Electric");
-            Pokemon torchic = new Pokemon("Torchic", 255, "Fire");
-            Pokemon celebi = new Pokemon("Celebi", 251, "Psychic", "Grass");
-            al.add(torchic);
-            hm.put(torchic, torchic.types);
-            al.add(pikachu);
-            hm.put(pikachu, pikachu.types);
-            al.add(celebi);
-            hm.put(celebi, celebi.types);
-
-            for (Pokemon p : al) {
-                pq.add(p);
-            }
-
-            Collections.sort(al);
-            assert al.get(0).equals(pikachu);
-            assert pq.remove().equals(pikachu);
-            assert al.get(1).equals(celebi);
-            assert pq.remove().equals(celebi);
-            assert al.get(2).equals(torchic);
-            assert pq.remove().equals(torchic);
-
-            assert hm.get(torchic).equals(torchic.types);
-            assert hm.get(pikachu).equals(pikachu.types);
-            assert hm.get(celebi).equals(celebi.types);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static class Pokemon implements Comparable<Pokemon> {
@@ -96,6 +60,7 @@ public class Class {
             return this.compareTo(other) == 0;
         }
 
+        @Override
         public int compareTo(Pokemon other) {
             if (this.pokedex_number < other.pokedex_number) {
                 return -1;
@@ -109,5 +74,42 @@ public class Class {
         class NotAPokemonTypeException extends Exception {
         }
 
+    }
+
+    public static void basicTestsHashComp() {
+        PriorityQueue<Pokemon> pq = new PriorityQueue<>();
+        ArrayList<Pokemon> al = new ArrayList<>();
+        HashMap<Pokemon, ArrayList<String>> hm = new HashMap<>();
+
+        try {
+            Pokemon pikachu = new Pokemon("Pikachu", 25, "Electric");
+            Pokemon torchic = new Pokemon("Torchic", 255, "Fire");
+            Pokemon celebi = new Pokemon("Celebi", 251, "Psychic", "Grass");
+            al.add(torchic);
+            hm.put(torchic, torchic.types);
+            al.add(pikachu);
+            hm.put(pikachu, pikachu.types);
+            al.add(celebi);
+            hm.put(celebi, celebi.types);
+
+            for (Pokemon p : al) {
+                pq.add(p);
+            }
+
+            Collections.sort(al);
+            assert al.get(0).equals(pikachu);
+            assert pq.remove().equals(pikachu);
+            assert al.get(1).equals(celebi);
+            assert pq.remove().equals(celebi);
+            assert al.get(2).equals(torchic);
+            assert pq.remove().equals(torchic);
+
+            assert hm.get(torchic).equals(torchic.types);
+            assert hm.get(pikachu).equals(pikachu.types);
+            assert hm.get(celebi).equals(celebi.types);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

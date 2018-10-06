@@ -15,16 +15,16 @@
       <file leaf-file-name="Class.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Class.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="41" column="54" lean-forward="false" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+            <state relative-caret-position="126">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#207#208#0" expanded="true" />
-                <element signature="e#243#244#0" expanded="true" />
-                <element signature="e#3025#3026#0" expanded="true" />
-                <element signature="e#3106#3107#0" expanded="true" />
-                <element signature="e#3154#3155#0" expanded="true" />
-                <element signature="e#3211#3212#0" expanded="true" />
+                <element signature="e#208#209#0" expanded="true" />
+                <element signature="e#244#245#0" expanded="true" />
+                <element signature="e#1711#1712#0" expanded="true" />
+                <element signature="e#1792#1793#0" expanded="true" />
+                <element signature="e#1840#1841#0" expanded="true" />
+                <element signature="e#1897#1898#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -260,16 +260,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Class.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="41" column="54" lean-forward="false" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+        <state relative-caret-position="126">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#207#208#0" expanded="true" />
-            <element signature="e#243#244#0" expanded="true" />
-            <element signature="e#3025#3026#0" expanded="true" />
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#3154#3155#0" expanded="true" />
-            <element signature="e#3211#3212#0" expanded="true" />
+            <element signature="e#208#209#0" expanded="true" />
+            <element signature="e#244#245#0" expanded="true" />
+            <element signature="e#1711#1712#0" expanded="true" />
+            <element signature="e#1792#1793#0" expanded="true" />
+            <element signature="e#1840#1841#0" expanded="true" />
+            <element signature="e#1897#1898#0" expanded="true" />
           </folding>
         </state>
       </provider>
