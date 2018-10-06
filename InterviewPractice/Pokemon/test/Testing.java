@@ -47,6 +47,6 @@ public class Testing {
 
     @Test(expected = Pokemon.NotAPokemonTypeException.class)
     public void notAPokemonExceptionTest() throws Pokemon.NotAPokemonTypeException {
-        Pokemon p = new Pokemon("NotAPokymon", -1, "Dark", "NotAPokymonType");
+        new Pokemon("NotAPokymon", -1, "Dark", "NotAPokymonType");
     }
 }
