@@ -147,38 +147,37 @@ public class Polygon {
         }
     }
 
-    private ArrayList<Point> points;
-    private ArrayList<Line> lines;
     private int[] xPoints;
     private int[] yPoints;
+    private int size;
 
     public Polygon(Point ...points) {
-        this.points = new ArrayList<>();
+        ArrayList<Point> pts = new ArrayList<>();
         for (Point p : points) {
-            this.points.add(p);
+            pts.add(p);
         }
+        this.size = pts.size();
 
-        int n = this.getNumPoints();
-        this.xPoints = new int[n];
-        this.yPoints = new int[n];
+        this.xPoints = new int[this.size];
+        this.yPoints = new int[this.size];
 
-        for (int i = 0; i < n; i++) {
-            Point cur_point = this.points.get(i);
+        for (int i = 0; i < this.size; i++) {
+            Point cur_point = pts.get(i);
             this.xPoints[i] = cur_point.getX();
             this.yPoints[i] = cur_point.getY();
         }
     }
 
     public ArrayList<Point> getPoints() {
-        this.points = new ArrayList<>();
+        ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < getNumPoints(); i++) {
-            this.points.add(new Point(this.xPoints[i], this.yPoints[i]));
+            points.add(new Point(this.xPoints[i], this.yPoints[i]));
         }
-        return this.points;
+        return points;
     }
 
     public ArrayList<Line> getLines() {
-        this.lines = new ArrayList<>();
+        ArrayList<Line> lines = new ArrayList<>();
         int n = getNumPoints();
         for (int i = 0; i < n; i++) {
             if (i > 0 && i < n - 1) {
@@ -188,7 +187,7 @@ public class Polygon {
                 lines.add(new Line(new Point(this.xPoints[i], this.yPoints[i]), new Point(this.xPoints[0], this.yPoints[0])));
             }
         }
-        return this.lines;
+        return lines;
     }
 
     public int[] getxPoints() {
@@ -200,7 +199,7 @@ public class Polygon {
     }
 
     public int getNumPoints() {
-        return this.points.size();
+        return size;
     }
 
     @Override
