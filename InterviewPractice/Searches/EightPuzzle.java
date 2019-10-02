@@ -7,10 +7,20 @@ public class EightPuzzle {
 		EightPuzzle runner = new EightPuzzle();
 
 		Board easyBoard = new Board(new int[][] { {1,2,0}, {4,5,3}, {7,8,6} });
-		System.out.println(easyBoard);
+		Board medBoard  = new Board(new int[][]  { {4,1,3}, {7,2,5}, {0,8,6} });
+		Board hardBoard = new Board(new int[][] { {2,5,0}, {1,7,3}, {4,8,6} });
 
-		ArrayList<Move> recRes = runner.rec(easyBoard);
-		System.out.println(recRes.toString());
+		ArrayList<Move> bfsRes = runner.bfs(easyBoard.clone(), 10000);
+		System.out.println(bfsRes.toString());
+		System.out.println(runner.checkSolution(easyBoard, bfsRes));
+
+		bfsRes = runner.bfs(medBoard.clone(), 10000);
+		System.out.println(bfsRes.toString());
+		System.out.println(runner.checkSolution(medBoard, bfsRes));
+
+		bfsRes = runner.bfs(hardBoard.clone(), 10000);
+		System.out.println(bfsRes.toString());
+		System.out.println(runner.checkSolution(hardBoard, bfsRes));
 	}
 
 	static class Board {
@@ -92,6 +102,9 @@ public class EightPuzzle {
 			int tmp = this.board[newY][newX];
 			this.board[newY][newX] = this.board[y][x];
 			this.board[y][x] = tmp;
+
+			this.blankRow = newX;
+			this.blankColumn = newY;
 		}
 	}
 
@@ -115,15 +128,13 @@ public class EightPuzzle {
 
 	static class State {
 		public Board board;
-		public int depth;
 		public ArrayList<Move> moves;
-		public ArrayList<Board> visited;
+		public int depth;
 
-		public State(Board board, ArrayList<Move> moves, ArrayList<Board> visited, int depth) {
+		public State(Board board, ArrayList<Move> moves, int depth) {
 			this.board = board;
 			this.moves = moves;
 			this.depth = depth;
-			this.visited = visited;
 		}
 	}
 
@@ -187,7 +198,7 @@ public class EightPuzzle {
 		return recHelper(initBoard, new ArrayList<Move>(), visited);
 	}
 
-	public ArrayList<Move> recHelper(Board curBoard, ArrayList<Move> movesSoFar, ArrayList<Board> visited) {
+	private ArrayList<Move> recHelper(Board curBoard, ArrayList<Move> movesSoFar, ArrayList<Board> visited) {
 		if (! boardListContains(visited, curBoard)) {
 			if (curBoard.equals(goalBoard))
 				return movesSoFar;
@@ -212,37 +223,43 @@ public class EightPuzzle {
 		return null;
 	}
 
-	/*
-		 public ArrayList<Move> bfs(Board initBoard, int limit) {
-		 State initState = new State(initBoard, new ArrayList<Move>(), new ArrayList<Board>(), 0);
-		 Queue<State> states = new LinkedList<>();
-		 states.add(initState);
+	private ArrayList<Move> bfs(Board initBoard, int limit) {
+		ArrayList<Board> visited = new ArrayList<>();
+		State initState = new State(initBoard, new ArrayList<Move>(), 0);
+		Queue<State> states = new LinkedList<>();
+		states.add(initState);
 
-		 while (states.size() > 0) {
-		 State head = states.poll();
+		while (states.size() > 0) {
+			State head = states.remove();
 
-		 if (head.depth > limit)
-		 continue;
+			if (head.depth > limit)
+				continue;
 
-		 if (head.board.equals(goalBoard))
-		 return head.moves;
+			Board curBoard = head.board;
+			if (boardListContains(visited, curBoard))
+				continue;
 
-		 else {
-		 for (Move move : getPossibleMoves(head.board)) {
-		 Board boardClone = head.board.clone();
-		 boardClone.makeMove(move);
-		 ArrayList<Move> newMoves = (ArrayList<Move>)head.moves.clone();
-		 newMoves.add(move);
-		 ArrayList<Board> visitedClone = (ArrayList<Board>)head.visited.clone();
-		 visitedClone.add(boardClone.clone());
-		 states.add(new State(boardClone, newMoves, visitedClone, head.depth + 1));
-		 }
-		 }
-		 }
+			if (curBoard.equals(goalBoard))
+				return head.moves;
 
-		 return null;
-		 }
-		 */
+			visited.add(curBoard);
+
+			for (Move m : this.possibleMoves) {
+				Board b = curBoard.clone();
+				if (b.isValidMove(m)) {
+					b.makeMove(m);
+
+					ArrayList<Move> newMoves = cloneMoveList(head.moves);
+					newMoves.add(m);
+
+					State newState = new State(b, newMoves, head.depth + 1);
+					states.add(newState);
+				}
+			}
+		}
+
+		return null;
+	}
 
 	public ArrayList<Move> dfs() {
 		return null;
@@ -254,5 +271,12 @@ public class EightPuzzle {
 
 	public ArrayList<Move> ids() {
 		return null;
+	}
+
+	public Boolean checkSolution(Board board, ArrayList<Move> soln) {
+		for (Move move : soln)
+			board.makeMove(move);
+
+		return board.equals(goalBoard);
 	}
 }
